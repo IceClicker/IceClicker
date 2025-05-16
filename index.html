@@ -3,14 +3,67 @@
   <head>
     <title>Ice Clicker</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="IceClickerFavicon.ico">
+    <link rel="icon" type="image/x-icon" href="IceClickerFavicon.ico" />
   </head>
   <body>
-      <img src="IceClickerLogo.png" width="300px" alt="Ice Clicker Logo" class="logo">
-      <!-- <h1 class="title">Ice Clicker </h1> -->
-      <p>Global warming is causing ice to melt! Save the world by clicking for ice!</p>
-      <p>Ice: <span id="ice"></span></p>
-      <img onclick="clickIce()" style="cursor: pointer;" src="ice.png">
-      <script src="script.js"></script>
+    <!-- Main Content -->
+    <div class="center-content">
+      <img src="IceClickerLogo.png" width="100px" alt="Ice Clicker Logo" class="logo" />
+    </div>
+    <main class="game-layout">
+      <!-- Left Sidebar -->
+      <aside class="sidebar left-bar">
+        <a class="settingsBtn" style="cursor: pointer;" onclick="openSettings()">⚙️ Settings</a><br><br>
+        <hr>
+        <h3>Stats</h3> 
+        <p>Ice per click: <span id="perClick"></span> 🧊</p>
+        <p>Ice per second: <span id="autoClick"></span> 🧊/s</p>
+        <p>Achievements: 0/30 🏆</p>
+        <br>
+        <hr>
+        <h3>Upgrades Owned</h3>
+        <div class="upgrade">
+          <h4>🛠️ Ice Drill</h4>
+          <p>+5/click — Cost: 200 🧊</p>
+        </div>
+        <div class="upgrade">
+          <h4>🐧 Penguin Worker</h4>
+          <p>+5/sec — Cost: 500 🧊</p>
+        </div>
+      </aside>
+      <!-- Center Clicker Area -->
+      <section class="clicker-area">
+        <h1>🧊 CLICK TO GATHER ICE 🧊</h1>
+        <p>
+          Global warming is causing ice to melt! Save the world by clicking for
+          ice!
+        </p>
+        <h3 class="title">Ice: <span id="ice"></span></h3>
+        <img onclick="clickIce()" style="cursor: pointer;" src="ice.png" />
+        <script src="script.js"></script>
+      </section>
+
+      <!-- Right Sidebar -->
+      <aside class="sidebar right-bar">
+        <h3>Upgrades Shop</h3>
+        <div class="upgrade">
+          <h4>🛠️ Ice Drill</h4>
+          <p>+5/click — Cost: 200 🧊</p>
+        </div>
+        <div class="upgrade">
+          <h4>🐧 Penguin Worker</h4>
+          <p>+5/sec — Cost: 500 🧊</p>
+        </div>
+        <div class="upgrade">
+          <h4>❄️ Thick of It</h4>
+          <p>+20% power — Cost: 750 🧊</p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer> 2025 Ice Clicker.
+      🧊 <a href="about.html">About Us!</a>
+  </footer>
   </body>
 </html>

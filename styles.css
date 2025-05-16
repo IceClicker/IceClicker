@@ -1,11 +1,143 @@
-body{
-  padding: 25px;
-  text-align: center;
-}
 .title {
 	color: #5C6AC4;
 }
 
 .iceButton{
   background-color: none;
+}
+
+/* Pulse Ice */
+/* Pulse Ice */
+@keyframes pulse-on-click {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2); /* Slightly larger scale for emphasis */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse-on-click {
+  animation: pulse-on-click 0.2s ease-in-out; /* Faster pulse effect */
+}
+
+.clicker-area img {
+  transition: transform 0.1s ease-in-out; /* Smooth transition for other effects */
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #e0f7ff, #cceeff);
+  color: #023047;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.settingsBtn {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #023047;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Layout */
+.game-layout {
+  display: flex;
+  flex: 1;
+  padding: 2rem;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.sidebar {
+  width: 250px;
+  max-width: 300px;
+  flex: 0 0 260px;
+  background: #ffffffaa;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.clicker-area {
+  flex: 1;
+  text-align: center;
+}
+
+#clicker-btn {
+  font-size: 3rem;
+  background: #d0f0ff;
+  border: 3px solid #99d3e6;
+  border-radius: 20px;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+#clicker-btn:hover {
+  transform: scale(1.05);
+  background: #c1ecff;
+}
+
+.upgrade {
+  margin: 1rem 0;
+  background: #eefbff;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #bde0f7;
+  cursor: pointer;
+}
+
+.upgrade:hover {
+  background: #d0f0ff;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #a8ddf0;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .game-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar {
+    width: 90%;
+  }
 }
