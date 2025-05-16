@@ -7,9 +7,5 @@ body{
 }
 
 .iceButton{
-  background-color: #0fffff;
-  border-radius: 150px;
-  width: 300px;
-  height: 300px;
-  font-size: 50px;
+  background-color: none;
 }
