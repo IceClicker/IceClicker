@@ -22,8 +22,9 @@
       <p>Ice per click: <span id="perClick"></span> 🧊</p>
       <p>Ice per second: <span id="autoClick"></span> 🧊/s</p>
       <div class="tooltip">Debuff:
-     <span id="globalWarmingPercent"></span> /min
-     <span class="tooltiptext">Global warming causes ice to melt every minute. Buy upgrades to stop global warming!</span>
+        <span id="globalWarmingPercent"></span> /min
+        <span class="tooltiptext">Global warming causes ice to melt every minute. Buy upgrades to stop global
+          warming!</span>
       </div>
 
       <p>Achievements: 0/30 🏆</p>
@@ -31,15 +32,15 @@
       <hr>
       <h3>Upgrades Owned</h3>
       <div class="upgrade">
-        <h4>🛠️ Ice Drill</h4>
-        <p>+5/click — Cost: 200 🧊</p>
+        <h4>🛠️ Ice Drill x2</h4>
+        <p>+5/click</p>
       </div>
       <div class="upgrade">
-        <h4>🐧 Penguin Worker</h4>
-        <p>+5/sec — Cost: 500 🧊</p>
+        <h4>🐧 Penguin Worker x3</h4>
+        <p>+5/sec</p>
       </div>
     </aside>
-    
+
     <!-- Center Clicker Area -->
     <section class="clicker-area">
       <!-- Snowfall -->
@@ -75,7 +76,36 @@
       </div>
     </aside>
   </main>
-
+  <!-- Settings -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div id="settings" class="settings">
+    <span class="close-btn" onclick="closeSettings()">✖</span>
+    <h1>Settings</h1>
+    <p>Adjust your game settings here!</p> <br>
+    <span>Sound: </span>
+    <label class="switch">
+      <input onclick="soundSettings()" id="soundCheckbox" type="checkbox" checked>
+      <span class="slider"></span>
+    </label> <br>
+    <span>Music: </span>
+    <label class="switch">
+      <input onclick="musicSettings()" id="musicCheckbox" type="checkbox" checked>
+      <span class="slider"></span>
+    </label> <br>
+    <span>Disable Snowflakes: </span>
+    <label class="switch">
+      <input onclick="snowfallSettings()" id="snowfallCheckbox" type="checkbox">
+      <span class="slider"></span>
+    </label> <br>
+    <span>Dark Mode: </span>
+    <label class="switch">
+      <input onclick="darkModeSettings()" id="darkModeCheckbox" type="checkbox">
+      <span class="slider"></span>
+    </label> <br>
+ <br><br>
+    <button id="resetProgressButton" class="styled-button" onclick="resetProgress()">Reset Progress</button>
+  </div>
+  </main>
   <!-- Footer -->
   <footer> 2025 Ice Clicker.
     🧊 <a href="about.html">About Us!</a>

@@ -6,7 +6,25 @@
   background-color: none;
 }
 
-/* Pulse Ice */
+.styled-button {
+  background-color: #f44336; /* Red background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.styled-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.styled-button:active {
+  background-color: #b71c1c; /* Even darker red when clicked */
+}
+
 /* Pulse Ice */
 @keyframes pulse-on-click {
   0% {
@@ -38,7 +56,7 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, #e0f7ff, #cceeff);
-  color: #023047;
+  color: #1a4c73;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -86,6 +104,50 @@ body {
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.settings {
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 50rem;
+  max-width: 90%;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000; 
+  display: none; 
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100; 
+  display: none; 
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #023047;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #4ac0f2; 
 }
 
 .clicker-area {
@@ -162,7 +224,7 @@ footer {
   font-size: 1rem;
   animation: fall linear infinite;
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
 }
 
 @keyframes fall {
@@ -214,4 +276,178 @@ footer {
   border-width: 6px;
   border-style: solid;
   border-color: #4fc3f7 transparent transparent transparent;
+}
+
+/* Settings Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+body.dark-mode {
+  background: linear-gradient(to bottom, #0d1b2a, #1b263b); /* Arctic night sky */
+  color: #e0f7ff;
+}
+
+/* General text & containers */
+.dark-mode .title {
+  color: #4ac0f2;
+}
+
+.dark-mode .settings {
+  background-color: #1b263b;
+  color: #e0f7ff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode .sidebar {
+  background-color: #1e2a3b;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  border: 1px solid #324863;
+  color: #e0f7ff;
+}
+
+.dark-mode .clicker-area {
+  background-color: transparent;
+  color: #e0f7ff;
+}
+
+.dark-mode #clicker-btn {
+  background: #27496d;
+  border: 3px solid #4ac0f2;
+  color: #e0f7ff;
+}
+
+.dark-mode #clicker-btn:hover {
+  background: #2e6f9f;
+}
+
+/* Buttons */
+.dark-mode .styled-button {
+  background-color: #4ac0f2;
+  color: #0d1b2a;
+}
+
+.dark-mode .styled-button:hover {
+  background-color: #79d4f8;
+}
+
+.dark-mode .styled-button:active {
+  background-color: #a8e4ff;
+}
+
+.dark-mode .close-btn {
+  color: #a8e4ff;
+}
+
+.dark-mode .close-btn:hover {
+  color: #4ac0f2;
+}
+
+/* Upgrades */
+.dark-mode .upgrade {
+  background: #22303f;
+  border: 1px solid #4ac0f2;
+  color: #e0f7ff;
+}
+
+.dark-mode .upgrade:hover {
+  background: #2e4053;
+}
+
+/* Footer */
+.dark-mode footer {
+  background: #1b263b;
+  color: #94a9c9;
+}
+
+/* Tooltip */
+.dark-mode .tooltip .tooltiptext {
+  background-color: #4ac0f2;
+  color: #0d1b2a;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.dark-mode .tooltip .tooltiptext::after {
+  border-color: #4ac0f2 transparent transparent transparent;
+}
+
+/* Settings Toggle Switch */
+.dark-mode .slider {
+  background-color: #324863;
+}
+
+.dark-mode input:checked + .slider {
+  background-color: #4ac0f2;
+} 
+
+body.dark-mode .settingsBtn {
+  background-color: #1e2a3b;
+  color: #e0f7ff;
+}
+
+body.dark-mode .settingsBtn:hover {
+  background-color: #2e4053;
+}
+
+body.dark-mode .settingsBtn:active {
+  background-color: #4ac0f2;
+}
+.settingsBtn:hover {
+  background-color: #c1ecff;
+  transform: scale(1.05);
+  cursor: pointer;
 }
