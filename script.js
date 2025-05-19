@@ -114,6 +114,15 @@ function musicSettings() {
   }
 }
 
+function updateLogo() {
+  const logo = document.getElementById("logo");
+  if (darkModeEnabled) {
+    logo.src = "IceClickerLogoDarkMode.png"; // Use dark mode logo
+  } else {
+    logo.src = "IceClickerLogoLightMode.png"; // Use light mode logo
+  }
+}
+
 function darkModeSettings() {
   const darkModeCheckbox = document.getElementById("darkModeCheckbox");
   if (darkModeCheckbox.checked) {
@@ -125,6 +134,7 @@ function darkModeSettings() {
     localStorage.setItem('darkModeEnabled', 'false');
     document.body.classList.remove("dark-mode");
   }
+  updateLogo(); // Update the logo when dark mode is toggled
 }
 
 // Update HTML DOM
@@ -137,13 +147,14 @@ window.onload = function () {
     document.body.classList.add("dark-mode");
     document.getElementById("darkModeCheckbox").checked = true;
   }
+  updateLogo(); // Ensure the correct logo is displayed on page load
 };
 
 function playBackgroundMusic() {
   if (music === "on" && !backgroundMusic) {
     backgroundMusic = new Audio('./FrozenStar.mp3');
     backgroundMusic.loop = true; 
-    backgroundMusic.volume = 0.5;
+    backgroundMusic.volume = 0.8;
     backgroundMusic.play().catch(err => console.error("Audio playback failed:", err));
   }
   // Set sound slider state

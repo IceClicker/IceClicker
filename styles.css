@@ -446,6 +446,11 @@ body.dark-mode .settingsBtn:hover {
 body.dark-mode .settingsBtn:active {
   background-color: #4ac0f2;
 }
+
+body.dark-mode footer {
+  background: #eef0f1; /* Snowish color */
+}
+
 .settingsBtn:hover {
   background-color: #c1ecff;
   transform: scale(1.05);

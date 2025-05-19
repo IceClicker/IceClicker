@@ -11,7 +11,7 @@
 <body>
   <!-- Main Content -->
   <div class="center-content">
-    <img src="IceClickerLogo.png" width="100px" alt="Ice Clicker Logo" class="logo" />
+    <img id="logo" src="IceClickerLogoLightMode.png" width="500px" alt="Ice Clicker Logo" class="logo" />
   </div>
   <main class="game-layout">
     <!-- Left Sidebar -->
@@ -48,15 +48,13 @@
       <div class="snowflake">❄️</div>
       <div class="snowflake">❄️</div>
       <div class="snowflake">❄️</div>
-
-      <h1>🧊 CLICK TO GATHER ICE 🧊</h1>
       <p>
         Global warming is causing ice to melt! Save the world by clicking for
-        ice!
-      </p>
-      <h3 class="title">Ice: <span id="ice"></span></h3>
+        ice! 
+      </p> <br>
       <img onclick="clickIce()" style="cursor: pointer;" src="ice.png" />
-      <script src="script.js"></script>
+      <h3 class="title">Ice: <span id="ice"></span><span style="font-size: 20px; font-weight: normal; color: inherit;"> sq in of land</span></h3><br>
+      <script src="script.js"></script> 
     </section>
 
     <!-- Right Sidebar -->
@@ -64,15 +62,15 @@
       <h3>Upgrades Shop</h3>
       <div class="upgrade">
         <h4>🛠️ Ice Drill</h4>
-        <p>+5/click — Cost: 200 🧊</p>
+        <p>+5/click — 200 🧊</p>
       </div>
       <div class="upgrade">
         <h4>🐧 Penguin Worker</h4>
-        <p>+5/sec — Cost: 500 🧊</p>
+        <p>+5/sec — 500 🧊</p>
       </div>
       <div class="upgrade">
         <h4>❄️ Thick of It</h4>
-        <p>+20% power — Cost: 750 🧊</p>
+        <p>+20% power — 750 🧊</p>
       </div>
     </aside>
   </main>
