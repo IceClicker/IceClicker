@@ -60,7 +60,12 @@ setInterval(() => {
     localStorage.setItem('globalWarmingPercent', globalWarmingPercent);
     hasReducedAt1000 = true;
   }
-}, 60000); 
+  if (globalWarmingPercent < 0) { 
+    globalWarmingPercent = 0;
+    localStorage.setItem('globalWarmingPercent', globalWarmingPercent);
+    document.getElementById("globalWarmingPercent").textContent = globalWarmingPercent;
+  }
+}, 30000); 
 
 // Settings
 function openSettings() {
@@ -116,7 +121,7 @@ function musicSettings() {
 
 function updateLogo() {
   const logo = document.getElementById("logo");
-  if (darkModeEnabled) {
+  if (darkModeEnabled === "true") {
     logo.src = "IceClickerLogoDarkMode.png"; // Use dark mode logo
   } else {
     logo.src = "IceClickerLogoLightMode.png"; // Use light mode logo
@@ -126,11 +131,11 @@ function updateLogo() {
 function darkModeSettings() {
   const darkModeCheckbox = document.getElementById("darkModeCheckbox");
   if (darkModeCheckbox.checked) {
-    darkModeEnabled = true;
+    darkModeEnabled = "true";
     localStorage.setItem('darkModeEnabled', 'true');
     document.body.classList.add("dark-mode");
   } else {
-    darkModeEnabled = false;
+    darkModeEnabled = "false";
     localStorage.setItem('darkModeEnabled', 'false');
     document.body.classList.remove("dark-mode");
   }
@@ -169,6 +174,7 @@ function playBackgroundMusic() {
 
 // Start background music after a user interaction
 document.addEventListener("click", playBackgroundMusic, { once: true });
+document.addEventListener("click", updateLogo);
 const maxSnowflakes = 50; // Set a maximum number of snowflakes
 
 function createSnowflake() {
