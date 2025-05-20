@@ -1,5 +1,5 @@
 .title {
-	color: #5C6AC4;
+	color: #1a4c73 ;
 }
 
 .iceButton{
@@ -62,19 +62,12 @@ body {
   min-height: 100vh;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-
 .center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 20px 0;
 }
 
 .settingsBtn {
@@ -455,4 +448,34 @@ body.dark-mode footer {
   background-color: #c1ecff;
   transform: scale(1.05);
   cursor: pointer;
+}
+
+/* Floating alert for global warming */
+.floating-alert {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 50px;
+  font-size: 1.2rem;
+  color: #f44336; /* Red color for alert */
+  animation: float-up 2s ease-out forwards, fade-out 2s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  100% {
+    transform: translate(-50%, -50px);
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

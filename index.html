@@ -10,6 +10,7 @@
 
 <body>
   <!-- Main Content -->
+   <br>
   <div class="center-content">
     <img id="logo" src="IceClickerLogoLightMode.png" width="500px" alt="Ice Clicker Logo" class="logo" />
   </div>
@@ -43,17 +44,14 @@
 
     <!-- Center Clicker Area -->
     <section class="clicker-area">
-      <!-- Snowfall -->
-      <div class="snowflake">❄️</div>
-      <div class="snowflake">❄️</div>
-      <div class="snowflake">❄️</div>
-      <div class="snowflake">❄️</div>
       <p>
         Global warming is causing ice to melt! Save the world by clicking for
         ice! 
       </p> <br>
       <img onclick="clickIce()" style="cursor: pointer;" src="ice.png" /><br><br>
-      <h3 class="title">Ice: <span id="ice"></span><span style="font-size: 20px; font-weight: normal; color: inherit;"> cubic in of land</span></h3><br>
+      <h2 class="title">Ice: <span id="ice"></span></h2>
+      <p>cubic inches</p>
+      <br>
       <script src="script.js"></script> 
     </section>
 
@@ -90,9 +88,9 @@
       <input onclick="musicSettings()" id="musicCheckbox" type="checkbox" checked>
       <span class="slider"></span>
     </label> <br>
-    <span>Disable Snowflakes: </span>
+    <span>Snowflakes: </span>
     <label class="switch">
-      <input onclick="snowfallSettings()" id="snowfallCheckbox" type="checkbox">
+      <input onclick="snowfallSettings()" id="snowfallCheckbox" type="checkbox" checked>
       <span class="slider"></span>
     </label> <br>
     <span>Dark Mode: </span>

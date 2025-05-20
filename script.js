@@ -16,6 +16,7 @@ let snowfallEnabled = localStorage.getItem('snowfallEnabled') || "on";
 localStorage.setItem('snowfallEnabled', snowfallEnabled); 
 let darkModeEnabled = localStorage.getItem('darkModeEnabled') || "false";  
 localStorage.setItem('darkModeEnabled', darkModeEnabled); 
+let lastActiveTime = Date.now();
 
 // Click!!!
 function clickIce() {
@@ -41,7 +42,6 @@ function clickIce() {
 }
 
 // Global Warming
-// Flags to ensure conditions run only once
 let hasReducedAt100 = false;
 let hasReducedAt1000 = false;
 setInterval(() => {
@@ -50,13 +50,13 @@ setInterval(() => {
     localStorage.setItem('ice', ice);
     document.getElementById("ice").textContent = ice;
   }
-  if (ice > 100 && ice < 1000 && globalWarmingPercent > 0.1 && !hasReducedAt100) {
-    globalWarmingPercent -=0.1;
+  if (ice > 100 && ice < 1000 && globalWarmingPercent > 0.5 && !hasReducedAt100) {
+    globalWarmingPercent -=0.5;
     localStorage.setItem('globalWarmingPercent', globalWarmingPercent);
     hasReducedAt100 = true;
   }
-  if (ice > 1000  && globalWarmingPercent > 0.1 && !hasReducedAt1000) {
-    globalWarmingPercent -=0.1;
+  if (ice > 1000  && globalWarmingPercent > 0.5 && !hasReducedAt1000) {
+    globalWarmingPercent -=0.5;
     localStorage.setItem('globalWarmingPercent', globalWarmingPercent);
     hasReducedAt1000 = true;
   }
@@ -66,6 +66,15 @@ setInterval(() => {
     document.getElementById("globalWarmingPercent").textContent = globalWarmingPercent;
   }
 }, 30000); 
+
+// Autoclick
+function autoClicker() {
+  setInterval(() => {
+    ice += autoClick;
+    localStorage.setItem('ice', ice);
+    document.getElementById("ice").textContent = ice;
+  }, 1000); 
+}
 
 // Settings
 function openSettings() {
@@ -92,13 +101,13 @@ function soundSettings() {
 function snowfallSettings() {
   const snowfallCheckbox = document.getElementById("snowfallCheckbox");
   if (snowfallCheckbox.checked) {
+    snowfallEnabled = "on";
+    localStorage.setItem('snowfallEnabled', 'on');
+  } else {
     snowfallEnabled = "off";
     localStorage.setItem('snowfallEnabled', 'off');
     const snowflakes = document.querySelectorAll('.snowflake');
     snowflakes.forEach(snowflake => snowflake.remove());
-  } else {
-    snowfallEnabled = "on";
-    localStorage.setItem('snowfallEnabled', 'on');
   }
 }
 
@@ -147,6 +156,7 @@ window.onload = function () {
   document.getElementById("ice").textContent = ice;
   document.getElementById("perClick").textContent = perClick;
   document.getElementById("autoClick").textContent = autoClick;
+  autoClicker()
   document.getElementById("globalWarmingPercent").textContent = `- ${globalWarmingPercent*100}%`;
   if (darkModeEnabled === "true") {
     document.body.classList.add("dark-mode");
@@ -216,6 +226,53 @@ function resetProgress() {
     localStorage.removeItem('perClick');
     localStorage.removeItem('autoClick');
     localStorage.removeItem('globalWarmingPercent');
+    localStorage.removeItem('lastActiveTime');
     location.reload(); // Reload the page to reset the game
   }
+}
+
+// Handle tab visibility change
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    // Tab is inactive
+    lastActiveTime = Date.now();
+  } else {
+    // Tab is active again
+    const timeElapsed = Date.now() - lastActiveTime;
+
+    // Adjust ice based on elapsed time for global warming
+    const iceMelted = Math.floor((timeElapsed / 30000) * (ice * globalWarmingPercent));
+    ice = Math.max(0, ice - iceMelted);
+    localStorage.setItem('ice', ice);
+    document.getElementById("ice").textContent = ice;
+
+    // Adjust autoClick progress based on elapsed time
+    const autoClickIce = Math.floor((timeElapsed / 1000) * autoClick);
+    ice += autoClickIce;
+    localStorage.setItem('ice', ice);
+    document.getElementById("ice").textContent = ice;
+  }
+});
+
+function showGlobalWarmingAlert(loss) {
+  const clickerArea = document.querySelector(".clicker-area");
+  const iceImage = clickerArea.querySelector("img");
+  const alertText = document.createElement("div");
+
+  alertText.textContent = `-${loss} 🧊 (Global Warming)`;
+  alertText.classList.add("floating-alert");
+
+  // Position the alert near the ice image
+  const iceRect = iceImage.getBoundingClientRect();
+  const clickerRect = clickerArea.getBoundingClientRect();
+  alertText.style.position = "absolute";
+  alertText.style.left = `50rem`;
+  alertText.style.top = `20rem`;
+
+  clickerArea.appendChild(alertText);
+
+  // Remove the alert after animation ends
+  alertText.addEventListener("animationend", () => {
+    alertText.remove();
+  });
 }
