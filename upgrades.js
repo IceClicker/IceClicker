@@ -582,8 +582,8 @@ function applyEffects(effects) {
     localStorage.setItem('autoClick', autoClick);
   }
   if (effects.globalWarmingReduction) {
-    if (typeof globalWarmingPercent === "undefined") window.globalWarmingPercent = 0;
-    globalWarmingPercent += effects.globalWarmingReduction;
+    if (typeof globalWarmingPercent === "undefined") window.globalWarmingPercent = 0.5;
+    globalWarmingPercent += effects.globalWarmingReduction / 100; // Convert to decimal
     localStorage.setItem('globalWarmingPercent', globalWarmingPercent);
   }
   if (effects.iceMultiplier) {
