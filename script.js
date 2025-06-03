@@ -17,8 +17,8 @@ function setVariables() {
   localStorage.setItem('perClick', perClick); 
   autoClick = parseInt(localStorage.getItem('autoClick')) || 0;  
   localStorage.setItem('autoClick', autoClick); 
-  globalWarmingPercent = parseInt(localStorage.getItem('globalWarmingPercent')) || 0.5;  
-  localStorage.setItem('globalWarmingPercent', globalWarmingPercent); 
+  globalWarmingPercent = parseFloat(localStorage.getItem('globalWarmingPercent')) || 0.5;
+  localStorage.setItem('globalWarmingPercent', globalWarmingPercent);
   sound = localStorage.getItem('sound') || "on";  
   localStorage.setItem('sound', sound); 
   music = localStorage.getItem('music') || "on";  

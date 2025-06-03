@@ -14,7 +14,7 @@ const upgrades = [
     name: "🌳 Trees",
     max: 250,
     description: "Decreases more CO2",
-    effectDescription: "-1% debuff",
+    effectDescription: "-2% debuff",
     baseCost: 25,
     effects: {
       globalWarmingReduction: -2,
@@ -583,7 +583,9 @@ function applyEffects(effects) {
   }
   if (effects.globalWarmingReduction) {
     if (typeof globalWarmingPercent === "undefined") window.globalWarmingPercent = 0.5;
-    globalWarmingPercent += effects.globalWarmingReduction / 100; // Convert to decimal
+    globalWarmingPercent += effects.globalWarmingReduction / 100;
+    // Always round to two decimals after update
+    globalWarmingPercent = Math.round(globalWarmingPercent * 100) / 100;
     localStorage.setItem('globalWarmingPercent', globalWarmingPercent);
   }
   if (effects.iceMultiplier) {
@@ -626,9 +628,10 @@ function applyEffects(effects) {
     debuffTimeMultiplier *= effects.debuffTimeMultiplier;
     localStorage.setItem('debuffTimeMultiplier', debuffTimeMultiplier);
   }
-  document.getElementById("ice").textContent = ice;
-  document.getElementById("perClick").textContent = perClick;
-  document.getElementById("autoClick").textContent = autoClick;
+document.getElementById("ice").textContent = localStorage.getItem('ice') || 0;
+document.getElementById("perClick").textContent = localStorage.getItem('perClick') || 0;
+document.getElementById("autoClick").textContent = localStorage.getItem('autoClick') || 0;
+document.getElementById("globalWarmingPercent").textContent =((parseFloat(localStorage.getItem('globalWarmingPercent')) || 0) * 100).toFixed(0) + "%";
 }
 
 // Format numbers to be user-friendly
