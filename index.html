@@ -48,11 +48,10 @@
         Global warming is causing ice to melt! Save the world by clicking for
         ice! 
       </p> <br>
-      <img onclick="clickIce()" style="cursor: pointer;" src="ice.png" /><br><br>
+      <img width="300px" onclick="clickIce()" style="cursor: pointer;" src="ice.png" /><br><br>
       <h2 class="title">Ice: <span id="ice"></span></h2>
       <p>cubic inches</p>
       <br>
-      <script src="script.js"></script> 
     </section>
 
     <!-- Right Sidebar -->
@@ -62,14 +61,7 @@
         <h4>🛠️ Ice Drill</h4>
         <p>+5/click — 200 🧊</p>
       </div>
-      <div class="upgrade">
-        <h4>🐧 Penguin Worker</h4>
-        <p>+5/sec — 500 🧊</p>
-      </div>
-      <div class="upgrade">
-        <h4>❄️ Thick of It</h4>
-        <p>+20% power — 750 🧊</p>
-      </div>
+      <div id="upgrade-container"></div>
     </aside>
   </main>
   <!-- Settings -->
@@ -107,5 +99,6 @@
     🧊 <a href="about.html">About Us!</a>
   </footer>
 </body>
-
+<script src="script.js"></script> 
+<script src="upgrades.js"></script> 
 </html>

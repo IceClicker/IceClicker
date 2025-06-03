@@ -1,22 +1,35 @@
+let ice;
+let perClick;
+let autoClick;
+let globalWarmingPercent;
+let sound;
+let music;
+let backgroundMusic;
+let snowfallEnabled;
+let darkModeEnabled;
+let lastActiveTime;
+
 // Initialize click variables
-let ice = parseInt(localStorage.getItem('ice')) || 0;  
-localStorage.setItem('ice', ice); 
-let perClick = parseInt(localStorage.getItem('perClick')) || 1;  
-localStorage.setItem('perClick', perClick); 
-let autoClick = parseInt(localStorage.getItem('autoClick')) || 0;  
-localStorage.setItem('autoClick', autoClick); 
-let globalWarmingPercent = parseInt(localStorage.getItem('globalWarmingPercent')) || 0.5;  
-localStorage.setItem('globalWarmingPercent', globalWarmingPercent); 
-let sound = localStorage.getItem('sound') || "on";  
-localStorage.setItem('sound', sound); 
-let music = localStorage.getItem('music') || "on";  
-localStorage.setItem('music', music); 
-let backgroundMusic = null; // Global reference to the audio object
-let snowfallEnabled = localStorage.getItem('snowfallEnabled') || "on";  
-localStorage.setItem('snowfallEnabled', snowfallEnabled); 
-let darkModeEnabled = localStorage.getItem('darkModeEnabled') || "false";  
-localStorage.setItem('darkModeEnabled', darkModeEnabled); 
-let lastActiveTime = Date.now();
+function setVariables() {
+  ice = parseInt(localStorage.getItem('ice')) || 0;  
+  localStorage.setItem('ice', ice); 
+  perClick = parseInt(localStorage.getItem('perClick')) || 1;  
+  localStorage.setItem('perClick', perClick); 
+  autoClick = parseInt(localStorage.getItem('autoClick')) || 0;  
+  localStorage.setItem('autoClick', autoClick); 
+  globalWarmingPercent = parseInt(localStorage.getItem('globalWarmingPercent')) || 0.5;  
+  localStorage.setItem('globalWarmingPercent', globalWarmingPercent); 
+  sound = localStorage.getItem('sound') || "on";  
+  localStorage.setItem('sound', sound); 
+  music = localStorage.getItem('music') || "on";  
+  localStorage.setItem('music', music); 
+  backgroundMusic = null; // Global reference to the audio object
+  snowfallEnabled = localStorage.getItem('snowfallEnabled') || "on";  
+  localStorage.setItem('snowfallEnabled', snowfallEnabled); 
+  darkModeEnabled = localStorage.getItem('darkModeEnabled') || "false";  
+  localStorage.setItem('darkModeEnabled', darkModeEnabled); 
+  lastActiveTime = Date.now();
+}
 
 // Click!!!
 function clickIce() {
@@ -153,6 +166,7 @@ function darkModeSettings() {
 
 // Update HTML DOM
 window.onload = function () {
+  setVariables();
   document.getElementById("ice").textContent = ice;
   document.getElementById("perClick").textContent = perClick;
   document.getElementById("autoClick").textContent = autoClick;
@@ -222,12 +236,8 @@ setInterval(createSnowflake, 300); // Adjust interval for more or fewer snowflak
 function resetProgress() {
   if (confirm("Are you sure you want to reset your progress? This action cannot be undone.")) {
     // Clear only game-related progress, not settings
-    localStorage.removeItem('ice');
-    localStorage.removeItem('perClick');
-    localStorage.removeItem('autoClick');
-    localStorage.removeItem('globalWarmingPercent');
-    localStorage.removeItem('lastActiveTime');
-    location.reload(); // Reload the page to reset the game
+    localStorage.clear();
+    setVariables();
   }
 }
 
