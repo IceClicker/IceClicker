@@ -59,7 +59,9 @@ let hasReducedAt100 = false;
 let hasReducedAt1000 = false;
 setInterval(() => {
   if (ice > 2) { 
-    ice -= Math.round(ice * globalWarmingPercent);
+    const loss = Math.round(ice * globalWarmingPercent);
+    ice -= loss;
+    showGlobalWarmingAlert(loss);
     localStorage.setItem('ice', ice);
     document.getElementById("ice").textContent = ice;
   }
@@ -176,7 +178,7 @@ window.onload = function () {
     document.body.classList.add("dark-mode");
     document.getElementById("darkModeCheckbox").checked = true;
   }
-  updateLogo(); // Ensure the correct logo is displayed on page load
+  updateLogo(); 
 };
 
 function playBackgroundMusic() {
@@ -272,16 +274,14 @@ function showGlobalWarmingAlert(loss) {
   alertText.textContent = `-${loss} 🧊 (Global Warming)`;
   alertText.classList.add("floating-alert");
 
-  // Position the alert near the ice image
   const iceRect = iceImage.getBoundingClientRect();
   const clickerRect = clickerArea.getBoundingClientRect();
   alertText.style.position = "absolute";
-  alertText.style.left = `50rem`;
+  alertText.style.left = `10rem`;
   alertText.style.top = `20rem`;
 
   clickerArea.appendChild(alertText);
 
-  // Remove the alert after animation ends
   alertText.addEventListener("animationend", () => {
     alertText.remove();
   });

@@ -35,7 +35,7 @@ const upgrades = [
     max: 150,
     description: "Create ice blocks",
     effectDescription: "+3 /click",
-    baseCost: 5000,
+    baseCost: 1,
     effects: {
       icePerClick: 3,
     },
@@ -564,7 +564,6 @@ function buyUpgrade(upgradeName) {
   if (upgrade.baseCost !== null) {
     ice -= upgrade.baseCost;
   }
-
   owned += 1;
   localStorage.setItem(upgrade.name, owned);
   applyEffects(upgrade.effects);
@@ -572,7 +571,6 @@ function buyUpgrade(upgradeName) {
 
 // Apply effects
 function applyEffects(effects) {
-  if (!effects) return;
   if (effects.icePerClick) {
     if (typeof perClick === "undefined") window.perClick = 0;
     perClick += effects.icePerClick;
@@ -628,6 +626,9 @@ function applyEffects(effects) {
     debuffTimeMultiplier *= effects.debuffTimeMultiplier;
     localStorage.setItem('debuffTimeMultiplier', debuffTimeMultiplier);
   }
+  document.getElementById("ice").textContent = ice;
+  document.getElementById("perClick").textContent = perClick;
+  document.getElementById("autoClick").textContent = autoClick;
 }
 
 // Format numbers to be user-friendly
@@ -653,7 +654,7 @@ upgrades.forEach((upgrade) => {
   tooltipWrapper.className = "tooltip";
   tooltipWrapper.style.display = "inline-block"; 
 
-  // Name (inline for hover)
+  // Name
   const title = document.createElement("h4");
   title.textContent = upgrade.name;
   title.style.display = "inline"; // Make h4 inline so tooltip works
@@ -668,20 +669,22 @@ upgrades.forEach((upgrade) => {
   // Effect
   const desc = document.createElement("span");
   desc.textContent = upgrade.effectDescription;
+
   // Cost
   const cost = document.createElement("p");
   cost.style.fontWeight = "bold";
   cost.style.marginBottom = "0.5rem";
   cost.textContent = `${formatNumber(upgrade.baseCost) + " 🧊"}`;
+
   // Buy by clicking
   upgradeDiv.addEventListener("click", function () {
     buyUpgrade(upgrade.name);
   });
+
   // Create cards
   upgradeDiv.appendChild(tooltipWrapper);
   upgradeDiv.appendChild(document.createElement("br"));
   upgradeDiv.appendChild(desc);
   upgradeDiv.appendChild(cost);
-
   container.appendChild(upgradeDiv);
 });

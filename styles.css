@@ -455,14 +455,19 @@ body.dark-mode footer {
 
 /* Floating alert for global warming */
 .floating-alert {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 50px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 0px; 
   font-size: 1.2rem;
-  color: #f44336; /* Red color for alert */
-  animation: float-up 2s ease-out forwards, fade-out 2s ease-out forwards;
+  color: #f44336; 
+  animation: float-up 3s ease-out forwards, fade-out 2s ease-out forwards;
   pointer-events: none;
+  text-align: center;
+  width: fit-content;
+  z-index: 9999;
 }
 
 @keyframes float-up {
