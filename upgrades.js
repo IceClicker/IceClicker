@@ -44,11 +44,11 @@ const upgrades = [
     name: "Ice Machine",
     max: 100,
     description: "Creates ice for you",
-    effectDescription: "+1 /sec, but -1% debuff",
+    effectDescription: "+1 /sec, but +1% debuff",
     baseCost: 100,
     effects: {
       icePerSecond: 1,
-      globalWarmingReduction: -1,
+      globalWarmingReduction: 1,
     },
   },
   {
@@ -555,13 +555,15 @@ function buyUpgrade(upgradeName) {
     return;
   }
 
-  if (upgrade.baseCost !== null && ice < upgrade.baseCost) {
+  // Use current cost from localStorage or fallback to baseCost
+  let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
+  if (currentCost !== null && ice < currentCost) {
     alert("Not enough ice!");
     return;
   }
 
-  if (upgrade.baseCost !== null) {
-    ice -= upgrade.baseCost;
+  if (currentCost !== null) {
+    ice -= currentCost;
   }
   owned += 1;
   localStorage.setItem(upgrade.name, owned);
@@ -644,9 +646,21 @@ function formatNumber(num) {
   return num.toString();
 }
 
+// Increase prices by 10%
+function increaseUpgradePrice(upgradeName) {
+  const upgrade = upgrades.find(u => u.name === upgradeName);
+  if (!upgrade) return;
+  let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
+  currentCost = Math.round(currentCost * 1.1);
+  localStorage.setItem(upgrade.name + "_cost", currentCost);
+  return currentCost;
+}
+
 // Render upgrades display
 const container = document.getElementById("upgrade-container");
 upgrades.forEach((upgrade) => {
+  // Use current cost or base cost
+  let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
   const upgradeDiv = document.createElement("div");
   upgradeDiv.className = "upgrade";
   upgradeDiv.style.cursor = "pointer";
@@ -677,11 +691,14 @@ upgrades.forEach((upgrade) => {
   const cost = document.createElement("p");
   cost.style.fontWeight = "bold";
   cost.style.marginBottom = "0.5rem";
-  cost.textContent = `${formatNumber(upgrade.baseCost) + " 🧊"}`;
+  cost.textContent = `${formatNumber(currentCost) + " 🧊"}`;
 
   // Buy by clicking
   upgradeDiv.addEventListener("click", function () {
     buyUpgrade(upgrade.name);
+    // After purchase, increase price and update display
+    const newCost = increaseUpgradePrice(upgrade.name);
+    cost.textContent = `${formatNumber(newCost) + " 🧊"}`;
   });
 
   // Create cards
