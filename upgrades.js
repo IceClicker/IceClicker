@@ -25,7 +25,7 @@ const upgrades = [
     max: 200,
     description: "Create ice cubes",
     effectDescription: "+1 /click",
-    baseCost: 25,
+    baseCost: 50,
     effects: {
       icePerClick: 1,
     },
@@ -35,7 +35,7 @@ const upgrades = [
     max: 150,
     description: "Create ice blocks",
     effectDescription: "+3 /click",
-    baseCost: 1,
+    baseCost: 75,
     effects: {
       icePerClick: 3,
     },
@@ -56,7 +56,7 @@ const upgrades = [
     max: 75,
     description: "Homemade and delicious!",
     effectDescription: "+5 /click, but -1% debuff",
-    baseCost: null,
+    baseCost: 150,
     effects: {
       icePerClick: 5,
       globalWarmingReduction: -1,
@@ -67,7 +67,7 @@ const upgrades = [
     max: 50,
     description: "Yummy ice cream makes you happy",
     effectDescription: "+10/click",
-    baseCost: null,
+    baseCost: 250,
     effects: {
       icePerClick: 10,
     },
@@ -77,7 +77,7 @@ const upgrades = [
     max: 30,
     description: "ICE CREAM!!!",
     effectDescription: "+25/click, debuff +1%",
-    baseCost: null,
+    baseCost: 500,
     effects: {
       icePerClick: 25,
       globalWarmingReduction: -1,
@@ -98,7 +98,7 @@ const upgrades = [
     max: 100,
     description: "Freezes ice (and ice cream)",
     effectDescription: "+10/click, +1x multiplier, -1% debuff",
-    baseCost: null,
+    baseCost: 1500,
     effects: {
       icePerClick: 10,
       iceMultiplier: 1,
@@ -110,7 +110,7 @@ const upgrades = [
     max: 100,
     description: "Let it fall",
     effectDescription: "+50/sec, enables snowman",
-    baseCost: null,
+    baseCost: 2500,
     effects: {
       icePerSecond: 50,
     },
@@ -121,7 +121,7 @@ const upgrades = [
     description: "Ice to meet you!",
     effectDescription:
       "+75/click, but -10/sec. Has a 1% chance every minute to produce another snowman.",
-    baseCost: null,
+    baseCost: 5000,
     effects: {
       icePerClick: 75,
       icePerSecond: -10,
@@ -132,7 +132,7 @@ const upgrades = [
     max: 25,
     description: "Ice house!",
     effectDescription: "+100/sec, but -10/click and +1% debuff",
-    baseCost: null,
+    baseCost: 7500,
     effects: {
       icePerSecond: 100,
       icePerClick: -10,
@@ -144,7 +144,7 @@ const upgrades = [
     max: 25,
     description: "Free ice grind",
     effectDescription: "+250/sec",
-    baseCost: null,
+    baseCost: 10000,
     effects: {
       icePerSecond: 250,
     },
@@ -154,7 +154,7 @@ const upgrades = [
     max: 6,
     description: "Bribe your sibling to help",
     effectDescription: "+500/sec",
-    baseCost: null,
+    baseCost: 15000,
     effects: {
       icePerSecond: 500,
     },
@@ -164,7 +164,7 @@ const upgrades = [
     max: 1,
     description: "Another you",
     effectDescription: "x2 click power + autoclick at 2 clicks per second",
-    baseCost: null,
+    baseCost: 25000,
     effects: {
       clickMultiplier: 2,
       autoClickPerSecond: 2,
@@ -175,7 +175,7 @@ const upgrades = [
     max: 100,
     description: "Cute and cuddly, increases focus",
     effectDescription: "+100/click",
-    baseCost: 10000,
+    baseCost: 50000,
     effects: {
       icePerClick: 100,
     },
@@ -185,7 +185,7 @@ const upgrades = [
     max: 75,
     description: "Penguin that gives you ice",
     effectDescription: "+1000/sec",
-    baseCost: null,
+    baseCost: 75000,
     effects: {
       icePerSecond: 1000,
     },
@@ -195,7 +195,7 @@ const upgrades = [
     max: 50,
     description: "Penguin that gives you more ice",
     effectDescription: "+5000/sec",
-    baseCost: null,
+    baseCost: 100000,
     effects: {
       icePerSecond: 5000,
     },
@@ -205,7 +205,7 @@ const upgrades = [
     max: 20,
     description: "Ruler of the penguins",
     effectDescription: "-50/sec, but x2 penguin production",
-    baseCost: null,
+    baseCost: 150000,
     effects: {
       icePerSecond: -50,
       penguinMultiplier: 2,
@@ -216,7 +216,7 @@ const upgrades = [
     max: 90,
     description: "Chubby tusked friend",
     effectDescription: "+250/click",
-    baseCost: null,
+    baseCost: 250000,
     effects: {
       icePerClick: 250,
     },
@@ -226,7 +226,7 @@ const upgrades = [
     max: 60,
     description: "Unicorn of the sea",
     effectDescription: "+8000/sec",
-    baseCost: null,
+    baseCost: 500000,
     effects: {
       icePerSecond: 8000,
     },
@@ -236,7 +236,7 @@ const upgrades = [
     max: 40,
     description: "Non-killer whale, I think",
     effectDescription: "+500/click, halves penguin production",
-    baseCost: null,
+    baseCost: 750000,
     effects: {
       icePerClick: 500,
       penguinMultiplier: 0.5,
@@ -247,7 +247,7 @@ const upgrades = [
     max: 25,
     description: "Fluffy, fierce, ice boss",
     effectDescription: "+1,000/sec, halves penguin production",
-    baseCost: null,
+    baseCost: 1000000,
     effects: {
       icePerSecond: 1000,
       penguinMultiplier: 0.5,
@@ -258,7 +258,7 @@ const upgrades = [
     max: 1,
     description: "",
     effectDescription: "Unlocks science upgrades, but -50/click to maintain",
-    baseCost: null,
+    baseCost: 1250000,
     effects: {
       icePerClick: -50,
     },
@@ -268,7 +268,7 @@ const upgrades = [
     max: 40,
     description: "Less CO2 and cleaner air",
     effectDescription: "-5% global warming",
-    baseCost: null,
+    baseCost: 1500000,
     effects: {
       globalWarmingReduction: -5,
     },
@@ -278,7 +278,7 @@ const upgrades = [
     max: 20,
     description: "Capture CO2",
     effectDescription: "-10% global warming",
-    baseCost: null,
+    baseCost: 1750000,
     effects: {
       globalWarmingReduction: -10,
     },
@@ -288,7 +288,7 @@ const upgrades = [
     max: 10,
     description: "Store CO2 in basalt",
     effectDescription: "-15% global warming",
-    baseCost: null,
+    baseCost: 2000000,
     effects: {
       globalWarmingReduction: -15,
     },
@@ -298,7 +298,7 @@ const upgrades = [
     max: null,
     description: "Turn science into solid ice",
     effectDescription: "+1,000/click",
-    baseCost: null,
+    baseCost: 2500000,
     effects: {
       icePerClick: 1000,
     },
@@ -308,7 +308,7 @@ const upgrades = [
     max: null,
     description: "Clean energy meets cool tech",
     effectDescription: "+10,000/sec",
-    baseCost: null,
+    baseCost: 3000000,
     effects: {
       icePerSecond: 10000,
     },
@@ -318,7 +318,7 @@ const upgrades = [
     max: 1,
     description: "N/A",
     effectDescription: "Unlocks factory upgrades, but -50/sec to maintain",
-    baseCost: null,
+    baseCost: 5000000,
     effects: {
       icePerSecond: -50,
     },
@@ -328,7 +328,7 @@ const upgrades = [
     max: 10,
     description: "Helps you make ice",
     effectDescription: "+10,000/click, but -100/sec",
-    baseCost: null,
+    baseCost: 7500000,
     effects: {
       icePerClick: 10000,
       icePerSecond: -100,
@@ -339,7 +339,7 @@ const upgrades = [
     max: 1,
     description: "Industrial ice",
     effectDescription: "+50,000/sec, +5% debuff",
-    baseCost: null,
+    baseCost: 10000000,
     effects: {
       icePerSecond: 50000,
       globalWarmingReduction: -5,
@@ -350,7 +350,7 @@ const upgrades = [
     max: 1,
     description: "Auto frosted pro ice",
     effectDescription: "+100,000/sec +10% debuff",
-    baseCost: null,
+    baseCost: 50000000000,
     effects: {
       icePerSecond: 100000,
       globalWarmingReduction: -10,
@@ -361,7 +361,7 @@ const upgrades = [
     max: 1,
     description: "Max = best",
     effectDescription: "+500,000/sec, +15% debuff",
-    baseCost: null,
+    baseCost: 200000000000,
     effects: {
       icePerSecond: 500000,
       globalWarmingReduction: -15,
@@ -372,7 +372,7 @@ const upgrades = [
     max: 25,
     description: "Harvest glaciers for ice",
     effectDescription: "+1 million/sec",
-    baseCost: null,
+    baseCost: 1000000000000,
     effects: {
       icePerSecond: 1000000,
     },
@@ -382,7 +382,7 @@ const upgrades = [
     max: 1,
     description: "More cute little cuddly creatures",
     effectDescription: "x2 for polar upgrades",
-    baseCost: null,
+    baseCost: 5000000000000,
     effects: {
       polarMultiplier: 2,
     },
@@ -392,17 +392,16 @@ const upgrades = [
     max: 1,
     description: "Back in time",
     effectDescription: "Unlocks Ice Age upgrades, but -100/sec to maintain.",
-    baseCost: null,
+    baseCost: 10000000000000,
     effects: {
       icePerSecond: -100,
     },
-  },
-  {
+  }, {
     name: "🐺 Dire Wolf",
     max: 25,
     description: "Who knew wolves could help?",
     effectDescription: "+50 million/sec",
-    baseCost: null,
+    baseCost: 25000000000000,
     effects: {
       icePerSecond: 50000000,
     },
@@ -412,7 +411,7 @@ const upgrades = [
     max: 15,
     description: "Not that scary, I promise",
     effectDescription: "+100 million/sec",
-    baseCost: null,
+    baseCost: 100000000000000,
     effects: {
       icePerSecond: 100000000,
     },
@@ -422,7 +421,7 @@ const upgrades = [
     max: 10,
     description: "Woolly and big",
     effectDescription: "+50,000/click",
-    baseCost: null,
+    baseCost: 500000000000000,
     effects: {
       icePerClick: 50000,
     },
@@ -432,7 +431,7 @@ const upgrades = [
     max: 10,
     description: "Lesser-known mammoth",
     effectDescription: "+100,000/click",
-    baseCost: null,
+    baseCost: 1000000000000000,
     effects: {
       icePerClick: 100000,
     },
@@ -442,7 +441,7 @@ const upgrades = [
     max: 1,
     description: "Magical things happen",
     effectDescription: "Unlocks Magic Upgrades, but -500,000/sec to maintain",
-    baseCost: null,
+    baseCost: 5000000000000000,
     effects: {
       icePerSecond: -500000,
     },
@@ -452,7 +451,7 @@ const upgrades = [
     max: 10,
     description: "Freeze water",
     effectDescription: "+1 billion/sec",
-    baseCost: null,
+    baseCost: 10000000000000000,
     effects: {
       icePerSecond: 1000000000,
     },
@@ -462,7 +461,7 @@ const upgrades = [
     max: 7,
     description: "You feel energized",
     effectDescription: "x2 clicks power",
-    baseCost: null,
+    baseCost: 50000000000000000,
     effects: {
       clickMultiplier: 2,
     },
@@ -472,7 +471,7 @@ const upgrades = [
     max: 5,
     description: "Bend time",
     effectDescription: "Doubles time for debuff",
-    baseCost: null,
+    baseCost: 100000000000000000,
     effects: {
       debuffTimeMultiplier: 2,
     },
@@ -482,7 +481,7 @@ const upgrades = [
     max: 3,
     description: "Speed up time (for you)",
     effectDescription: "x2 autoclick",
-    baseCost: null,
+    baseCost: 500000000000000000,
     effects: {
       autoClickMultiplier: 2,
     },
@@ -492,7 +491,7 @@ const upgrades = [
     max: 1,
     description: "Straight out of a fairy tale!",
     effectDescription: "x2 ice/sec",
-    baseCost: null,
+    baseCost: 1000000000000000000,
     effects: {
       icePerSecondMultiplier: 2,
     },
@@ -502,7 +501,7 @@ const upgrades = [
     max: 1,
     description: "The almighty lord",
     effectDescription: "1 trillion/sec, unlocks Cosmic upgrades, but -500/click to maintain",
-    baseCost: null,
+    baseCost: 5000000000000000000,
     effects: {
       icePerSecond: 1000000000000,
       icePerClick: -500,
@@ -513,7 +512,7 @@ const upgrades = [
     max: 5,
     description: "Amazon ice delivery but faster",
     effectDescription: "500 trillion/sec",
-    baseCost: null,
+    baseCost: 10000000000000000000,
     effects: {
       icePerSecond: 500000000000000,
     },
@@ -523,7 +522,7 @@ const upgrades = [
     max: 2,
     description: "A planet full of ice",
     effectDescription: "1 million/click",
-    baseCost: null,
+    baseCost: 50000000000000000000,
     effects: {
       icePerClick: 1000000,
     },
@@ -533,11 +532,11 @@ const upgrades = [
     max: 1,
     description: "See for yourself",
     effectDescription: "1 quadrillion/sec",
-    baseCost: null,
+    baseCost: 100000000000000000000,
     effects: {
       icePerSecond: 1000000000000000,
     },
-  },
+  }
 ];
 
 upgrades.forEach((element) => {
@@ -628,15 +627,16 @@ function applyEffects(effects) {
     debuffTimeMultiplier *= effects.debuffTimeMultiplier;
     localStorage.setItem('debuffTimeMultiplier', debuffTimeMultiplier);
   }
-document.getElementById("ice").textContent = localStorage.getItem('ice') || 0;
-document.getElementById("perClick").textContent = localStorage.getItem('perClick') || 0;
-document.getElementById("autoClick").textContent = localStorage.getItem('autoClick') || 0;
-document.getElementById("globalWarmingPercent").textContent =((parseFloat(localStorage.getItem('globalWarmingPercent')) || 0) * 100).toFixed(0) + "%";
+  document.getElementById("ice").textContent = localStorage.getItem('ice') || 0;
+  document.getElementById("perClick").textContent = localStorage.getItem('perClick') || 0;
+  document.getElementById("autoClick").textContent = localStorage.getItem('autoClick') || 0;
+  document.getElementById("globalWarmingPercent").textContent = ((parseFloat(localStorage.getItem('globalWarmingPercent')) || 0) * 100).toFixed(0) + "%";
 }
 
 // Format numbers to be user-friendly
 function formatNumber(num) {
   if (num === null || num === undefined) return "???";
+  if (num >= 1e15) return (num / 1e15).toFixed(3).replace(/\.?0+$/, "") + " quadrillion";
   if (num >= 1e12) return (num / 1e12).toFixed(3).replace(/\.?0+$/, "") + " trillion";
   if (num >= 1e9) return (num / 1e9).toFixed(3).replace(/\.?0+$/, "") + " billion";
   if (num >= 1e6) return (num / 1e6).toFixed(3).replace(/\.?0+$/, "") + " million";
@@ -655,7 +655,7 @@ upgrades.forEach((upgrade) => {
   // Tooltip wrapper
   const tooltipWrapper = document.createElement("span");
   tooltipWrapper.className = "tooltip";
-  tooltipWrapper.style.display = "inline-block"; 
+  tooltipWrapper.style.display = "inline-block";
 
   // Name
   const title = document.createElement("h4");
