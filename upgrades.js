@@ -715,7 +715,7 @@ function boughtAlert(cost, item) {
   const clickerArea = document.querySelector(".clicker-area");
   const alertText = document.createElement("div");
 
-  alertText.textContent = `-${cost} 🧊 -${item}`;
+  alertText.textContent = `-${cost} 🧊 (Bought ${item})`;
   alertText.classList.add("floating-alert");
 
   alertText.style.position = "absolute";
