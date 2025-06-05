@@ -94,11 +94,67 @@ body {
   max-width: 300px;
   flex: 0 0 260px;
   background: #ffffffaa;
-  padding: 1rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-right: 0rem;
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   max-height: 27rem;
+  width: 15rem;
+}
+
+.upgrade-container {
+  padding-right: 0rem;
+  max-height: 24rem;   
+  width: 100%;         
+  min-width: 0;        
+  box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  scrollbar-width: auto;
+  scrollbar-color: #4ac0f2 #eefbff;
+}
+
+.upgrade-container::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+/* Chrome, Edge, Safari */
+.upgrade-container::-webkit-scrollbar {
+  width: 8px;
+  background: #eefbff;
+  border-radius: 8px;
+}
+
+.upgrade-container::-webkit-scrollbar-thumb {
+  background: #4ac0f2;
+  border-radius: 8px;
+  border: 2px solid #eefbff;
+}
+
+.upgrade-container::-webkit-scrollbar-thumb:hover {
+  background: #2196F3;
+}
+
+/* Dark mode */
+body.dark-mode .upgrade-container {
+  scrollbar-color: #4ac0f2 #22303f;
+}
+
+body.dark-mode .upgrade-container::-webkit-scrollbar {
+  background: #22303f;
+}
+
+body.dark-mode .upgrade-container::-webkit-scrollbar-thumb {
+  background: #4ac0f2;
+  border: 2px solid #22303f;
+}
+
+body.dark-mode .upgrade-container::-webkit-scrollbar-thumb:hover {
+  background: #79d4f8;
 }
 
 .settings {
@@ -354,6 +410,7 @@ body.dark-mode {
   box-shadow: 0 0 8px rgba(0,0,0,0.3);
   border: 1px solid #324863;
   color: #e0f7ff;
+  overflow-x: hidden; /* Prevent horizontal scrollbar in dark mode */
 }
 
 .dark-mode .clicker-area {

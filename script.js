@@ -278,7 +278,7 @@ function showGlobalWarmingAlert(loss) {
   const clickerRect = clickerArea.getBoundingClientRect();
   alertText.style.position = "absolute";
   alertText.style.left = `10rem`;
-  alertText.style.top = `20rem`;
+  alertText.style.top = `14rem`;
 
   clickerArea.appendChild(alertText);
 

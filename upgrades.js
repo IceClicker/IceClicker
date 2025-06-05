@@ -555,7 +555,7 @@ function buyUpgrade(upgradeName) {
     return;
   }
 
-  // Use current cost from localStorage or fallback to baseCost
+  // Get cost
   let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
   if (currentCost !== null && ice < currentCost) {
     alert("Not enough ice!");
@@ -564,6 +564,7 @@ function buyUpgrade(upgradeName) {
 
   if (currentCost !== null) {
     ice -= currentCost;
+    boughtAlert(currentCost, upgrade.name);
   }
   owned += 1;
   localStorage.setItem(upgrade.name, owned);
@@ -708,3 +709,22 @@ upgrades.forEach((upgrade) => {
   upgradeDiv.appendChild(cost);
   container.appendChild(upgradeDiv);
 });
+
+// Show bought alert
+function boughtAlert(cost, item) {
+  const clickerArea = document.querySelector(".clicker-area");
+  const alertText = document.createElement("div");
+
+  alertText.textContent = `-${cost} 🧊 -${item}`;
+  alertText.classList.add("floating-alert");
+
+  alertText.style.position = "absolute";
+  alertText.style.left = `10rem`;
+  alertText.style.top = `14rem`;
+
+  clickerArea.appendChild(alertText);
+
+  alertText.addEventListener("animationend", () => {
+    alertText.remove();
+  });
+}
