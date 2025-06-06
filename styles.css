@@ -67,13 +67,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow: auto; 
-  scrollbar-width: none; 
-  -ms-overflow-style: none;
+  overflow-x: hidden;   
+  overflow-y: auto;            
+  scrollbar-width: none;     
+  -ms-overflow-style: none;   
 }
 
 body::-webkit-scrollbar {
-  display: none;
+  display: none;         
 }
 
 .center-content {
@@ -99,7 +100,6 @@ body::-webkit-scrollbar {
   padding-left: 2rem;
   padding-right: 2rem;
   padding-bottom: 1rem;
-  padding-top: 0.7rem;
   gap: 2rem;
   justify-content: center;
   align-items: flex-start;
@@ -185,7 +185,7 @@ body.dark-mode .upgrade-container::-webkit-scrollbar-thumb:hover {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000; 
+  z-index: 10000; 
   display: none; 
 }
 
@@ -221,6 +221,7 @@ body.dark-mode .upgrade-container::-webkit-scrollbar-thumb:hover {
 .clicker-area {
   flex: 1;
   text-align: center;
+  padding-top: 1rem;
 }
 
 #clicker-btn {
@@ -427,7 +428,6 @@ body.dark-mode {
   box-shadow: 0 0 8px rgba(0,0,0,0.3);
   border: 1px solid #324863;
   color: #e0f7ff;
-  overflow-x: hidden; /* Prevent horizontal scrollbar in dark mode */
 }
 
 .dark-mode .clicker-area {
