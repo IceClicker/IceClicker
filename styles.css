@@ -2,6 +2,13 @@
 	color: #1a4c73 ;
 }
 
+.logo img {
+  display: block;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  line-height: 1;
+}
+
 .iceButton{
   background-color: none;
 }
@@ -60,6 +67,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: auto; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .center-content {
@@ -82,7 +96,10 @@ body {
 .game-layout {
   display: flex;
   flex: 1;
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  padding-top: 0.7rem;
   gap: 2rem;
   justify-content: center;
   align-items: flex-start;

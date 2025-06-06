@@ -500,10 +500,10 @@ const upgrades = [
     name: "Ice Titan",
     max: 1,
     description: "The almighty lord",
-    effectDescription: "1 trillion/sec, unlocks Cosmic upgrades, but -500/click to maintain",
-    baseCost: 5000000000000000000,
+    effectDescription: "100 billion/sec, unlocks Cosmic upgrades, but -500/click to maintain",
+    baseCost: 100000000000,
     effects: {
-      icePerSecond: 1000000000000,
+      icePerSecond: 100000000000,
       icePerClick: -500,
     },
   },
@@ -511,30 +511,30 @@ const upgrades = [
     name: "☄️ Comet",
     max: 5,
     description: "Amazon ice delivery but faster",
-    effectDescription: "500 trillion/sec",
-    baseCost: 10000000000000000000,
+    effectDescription: "500 billion/sec",
+    baseCost: 1000000000000,
     effects: {
-      icePerSecond: 500000000000000,
+      icePerSecond: 500000000000,
     },
   },
   {
     name: "🪐 Ice Planet",
     max: 2,
     description: "A planet full of ice",
-    effectDescription: "1 million/click",
-    baseCost: 50000000000000000000,
+    effectDescription: "10 million/click",
+    baseCost: 5000000000000,
     effects: {
-      icePerClick: 1000000,
+      icePerClick: 10000000,
     },
   },
   {
     name: "🕳️ Black Hole",
     max: 1,
     description: "See for yourself",
-    effectDescription: "1 quadrillion/sec",
-    baseCost: 100000000000000000000,
+    effectDescription: "1 trillion/sec",
+    baseCost: 10000000000000,
     effects: {
-      icePerSecond: 1000000000000000,
+      icePerSecond: 1000000000000,
     },
   }
 ];
