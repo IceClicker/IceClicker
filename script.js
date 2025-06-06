@@ -220,7 +220,7 @@ function createSnowflake() {
   snowflake.textContent = randomType;
 
   snowflake.classList.add("snowflake");
-  snowflake.style.left = Math.random() * 100 + "%"; // Random horizontal position
+  snowflake.style.left = Math.random() * 98 + "%"; // Random horizontal position
   snowflake.style.fontSize = Math.random() * 1.5 + 0.5 + "rem"; // Random size
   snowflake.style.animationDuration = Math.random() * 5 + 2 + "s"; // Random fall speed
 
@@ -286,3 +286,41 @@ function showGlobalWarmingAlert(loss) {
     alertText.remove();
   });
 }
+
+// Zoom prevention functions
+  // Prevent zoom with keyboard (Ctrl/Cmd + +/-/0) and mouse wheel
+  window.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && (
+        e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0'
+      )) {
+      e.preventDefault();
+    }
+  });
+
+  // Prevent zoom with mouse wheel + Ctrl/Cmd
+  window.addEventListener('wheel', function(e) {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Prevent pinch-zoom on touch devices
+  window.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+  });
+
+// Overflow
+function updateBodyOverflow() {
+  if (window.devicePixelRatio === 1) {
+    document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "hidden";
+    document.querySelector("footer").style.marginBottom = "";
+  } else {
+    document.body.style.overflowX = "";
+    document.body.style.overflowY = "";
+    document.querySelector("footer").style.marginBottom = "1rem";
+  }
+}
+
+window.addEventListener("resize", updateBodyOverflow);
+window.addEventListener("DOMContentLoaded", updateBodyOverflow);

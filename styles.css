@@ -99,7 +99,6 @@ body::-webkit-scrollbar {
   flex: 1;
   padding-left: 2rem;
   padding-right: 2rem;
-  padding-bottom: 1rem;
   gap: 2rem;
   justify-content: center;
   align-items: flex-start;
@@ -255,10 +254,9 @@ body.dark-mode .upgrade-container::-webkit-scrollbar-thumb:hover {
 
 footer {
   text-align: center;
-  padding: 1rem;
-  background: #a8ddf0;
-  margin-top: auto;
   font-size: 0.9rem;
+  width: 100%;
+  position: relative;           
 }
 
 /* Responsive layout for mobile screens (Side by side sidebars on the bottom)*/
@@ -274,7 +272,6 @@ footer {
 
   .sidebar {
     width: 45%; 
-    margin: 10px;
   }
 
   .left-bar,
