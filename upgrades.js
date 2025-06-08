@@ -520,7 +520,9 @@ const upgrades = [
 ];
 
 upgrades.forEach((element) => {
-  localStorage.setItem(element.name, 0);
+  if (localStorage.getItem(element.name) === null) {
+    localStorage.setItem(element.name, 0);
+  }
 });
 
 // Buy upgrade function
