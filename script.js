@@ -240,6 +240,7 @@ function resetProgress() {
     // Clear only game-related progress, not settings
     localStorage.clear();
     setVariables();
+    window.location.reload();
   }
 }
 
