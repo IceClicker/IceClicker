@@ -65,7 +65,7 @@ const upgrades = [
   {
     name: "🍦 Ice Cream",
     max: 50,
-    description: "Yummy ice cream makes you happy",
+    description: "Yum! Makes you happy.",
     effectDescription: "+10/click",
     baseCost: 250,
     effects: {
@@ -525,6 +525,16 @@ upgrades.forEach((element) => {
   }
 });
 
+// Lock Upgrades
+function isUpgradeLocked(upgrade) {
+  if (upgrade.name === "☃️ Snowman") {
+    return parseInt(localStorage.getItem("🌨️ Snowstorm") || "0", 10) < 1;
+  }
+  // mores stuff
+  return false;
+}
+
+
 // Buy upgrade function
 function buyUpgrade(upgradeName) {
   const upgrade = upgrades.find(u => u.name === upgradeName);
@@ -642,7 +652,7 @@ function increaseUpgradePrice(upgradeName) {
 // Render upgrades display
 const container = document.getElementById("upgrade-container");
 upgrades.forEach((upgrade) => {
-  // Use current cost or base cost
+  let owned = parseInt(localStorage.getItem(upgrade.name) || "0", 10);
   let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
   const upgradeDiv = document.createElement("div");
   upgradeDiv.className = "upgrade";
@@ -657,7 +667,7 @@ upgrades.forEach((upgrade) => {
   // Name
   const title = document.createElement("h4");
   title.textContent = upgrade.name;
-  title.style.display = "inline"; // Make h4 inline so tooltip works
+  title.style.display = "inline";
   tooltipWrapper.appendChild(title);
 
   // Tooltip text
@@ -670,26 +680,69 @@ upgrades.forEach((upgrade) => {
   const desc = document.createElement("span");
   desc.textContent = upgrade.effectDescription;
 
+  // Move these lines BEFORE you use maxed in the ownership display!
+  const locked = isUpgradeLocked(upgrade);
+  const maxed = upgrade.max !== null && owned >= upgrade.max;
+
+  // Ownership display
+  const ownedDisplay = document.createElement("span");
+  ownedDisplay.style.fontWeight = "bold";
+  if (maxed) {
+    ownedDisplay.textContent = "MAX";
+  } else if (owned > 0) {
+    ownedDisplay.textContent = `Owned: ${owned}`;
+  } else {
+    ownedDisplay.textContent = ""; // Don't display anything if you don't own any
+  }
+
   // Cost
   const cost = document.createElement("p");
   cost.style.fontWeight = "bold";
   cost.style.marginBottom = "0.5rem";
   cost.textContent = `${formatNumber(currentCost) + " 🧊"}`;
 
+  if (locked) {
+    upgradeDiv.classList.add("locked-upgrade");
+    upgradeDiv.style.opacity = "0.5";
+    upgradeDiv.style.pointerEvents = "none";
+    cost.textContent = "Locked";
+  } else if (maxed) {
+    upgradeDiv.classList.add("maxed-upgrade");
+    upgradeDiv.style.opacity = "0.5";
+    upgradeDiv.style.pointerEvents = "none";
+    cost.textContent = "MAXED";
+  }
+
   // Buy by clicking
   upgradeDiv.addEventListener("click", function () {
+    if (isUpgradeLocked(upgrade)) return;
+    if (upgrade.max !== null && owned >= upgrade.max) return;
     buyUpgrade(upgrade.name);
     // After purchase, increase price and update display
+    owned = parseInt(localStorage.getItem(upgrade.name) || "0", 10);
+    if (upgrade.max !== null && owned >= upgrade.max) {
+      ownedDisplay.textContent = "MAX";
+      cost.textContent = "MAXED";
+      upgradeDiv.classList.add("maxed-upgrade");
+      upgradeDiv.style.opacity = "0.5";
+      upgradeDiv.style.pointerEvents = "none";
+      return;
+    }
+    ownedDisplay.textContent = `Owned: ${owned}${upgrade.max !== null ? "/" + upgrade.max : ""}`;
     const newCost = increaseUpgradePrice(upgrade.name);
     cost.textContent = `${formatNumber(newCost) + " 🧊"}`;
   });
 
-  // Create cards
-  upgradeDiv.appendChild(tooltipWrapper);
+// Create cards
+upgradeDiv.appendChild(tooltipWrapper);
+upgradeDiv.appendChild(document.createElement("br"));
+upgradeDiv.appendChild(desc);
+if (ownedDisplay.textContent !== "") {
   upgradeDiv.appendChild(document.createElement("br"));
-  upgradeDiv.appendChild(desc);
-  upgradeDiv.appendChild(cost);
-  container.appendChild(upgradeDiv);
+  upgradeDiv.appendChild(ownedDisplay);
+}
+upgradeDiv.appendChild(cost);
+container.appendChild(upgradeDiv);
 });
 
 // Show bought alert
