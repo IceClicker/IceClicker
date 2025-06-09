@@ -525,12 +525,46 @@ upgrades.forEach((element) => {
   }
 });
 
-// Lock Upgrades
 function isUpgradeLocked(upgrade) {
+  // Snowman requires at least 1 Snowstorm
   if (upgrade.name === "☃️ Snowman") {
     return parseInt(localStorage.getItem("🌨️ Snowstorm") || "0", 10) < 1;
   }
-  // mores stuff
+  // Science upgrades require Scientist
+  const scienceUpgrades = [
+    "Renewable energy", "Carbon Capture", "Basalt Storage", "⚗️ Cryoengineering", "💥 Fusion Freezer", "🏭 Ice Factory"
+  ];
+  if (scienceUpgrades.includes(upgrade.name)) {
+    return parseInt(localStorage.getItem("👨‍🔬 Scientist") || "0", 10) < 1;
+  }
+  // Factory upgrades require Ice Factory
+  const factoryUpgrades = [
+    "👷 Factory Workers", "Super Icer 5000", "Frosto-Matic Pro", "Ice-It MAX", "🗻 Glacier", "Ice Age"
+  ];
+  if (factoryUpgrades.includes(upgrade.name)) {
+    return parseInt(localStorage.getItem("🏭 Ice Factory") || "0", 10) < 1;
+  }
+  // Ice Age upgrades require Ice Age
+  const iceAgeUpgrades = [
+    "🐺 Dire Wolf", "🐯 Sabertooth Tiger", "Woolly Mammoth", "Mastodon", "🧙‍♂️ Wizard"
+  ];
+  if (iceAgeUpgrades.includes(upgrade.name)) {
+    return parseInt(localStorage.getItem("Ice Age") || "0", 10) < 1;
+  }
+  // Magic upgrades require Wizard
+  const magicUpgrades = [
+    "Freeze water", "⚡ Power boost", "Slow Time", "Speed Up", "Ice Titan"
+  ];
+  if (magicUpgrades.includes(upgrade.name)) {
+    return parseInt(localStorage.getItem("🧙‍♂️ Wizard") || "0", 10) < 1;
+  }
+  // Cosmic upgrades require Ice Titan
+  const cosmicUpgrades = [
+    "☄️ Comet", "🪐 Ice Planet", "🕳️ Black Hole"
+  ];
+  if (cosmicUpgrades.includes(upgrade.name)) {
+    return parseInt(localStorage.getItem("Ice Titan") || "0", 10) < 1;
+  }
   return false;
 }
 
@@ -561,6 +595,7 @@ function buyUpgrade(upgradeName) {
   owned += 1;
   localStorage.setItem(upgrade.name, owned);
   applyEffects(upgrade.effects);
+  increaseUpgradePrice(upgrade.name); 
 }
 
 // Apply effects
@@ -650,100 +685,88 @@ function increaseUpgradePrice(upgradeName) {
 }
 
 // Render upgrades display
-const container = document.getElementById("upgrade-container");
-upgrades.forEach((upgrade) => {
-  let owned = parseInt(localStorage.getItem(upgrade.name) || "0", 10);
-  let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
-  const upgradeDiv = document.createElement("div");
-  upgradeDiv.className = "upgrade";
-  upgradeDiv.style.cursor = "pointer";
-  upgradeDiv.title = "Click to buy";
+function renderUpgrades() {
+  const container = document.getElementById("upgrade-container");
+  container.innerHTML = ""; // Clear previous upgrades
 
-  // Tooltip wrapper
-  const tooltipWrapper = document.createElement("span");
-  tooltipWrapper.className = "tooltip";
-  tooltipWrapper.style.display = "inline-block";
+  upgrades.forEach((upgrade) => {
+    let owned = parseInt(localStorage.getItem(upgrade.name) || "0", 10);
+    let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
+    const upgradeDiv = document.createElement("div");
+    upgradeDiv.className = "upgrade";
+    upgradeDiv.style.cursor = "pointer";
+    upgradeDiv.title = "Click to buy";
 
-  // Name
-  const title = document.createElement("h4");
-  title.textContent = upgrade.name;
-  title.style.display = "inline";
-  tooltipWrapper.appendChild(title);
+    // Tooltip wrapper
+    const tooltipWrapper = document.createElement("span");
+    tooltipWrapper.className = "tooltip";
+    tooltipWrapper.style.display = "inline-block";
 
-  // Tooltip text
-  const tooltipText = document.createElement("span");
-  tooltipText.className = "tooltiptext";
-  tooltipText.textContent = upgrade.description;
-  tooltipWrapper.appendChild(tooltipText);
+    // Name
+    const title = document.createElement("h4");
+    title.textContent = upgrade.name;
+    title.style.display = "inline";
+    tooltipWrapper.appendChild(title);
 
-  // Effect
-  const desc = document.createElement("span");
-  desc.textContent = upgrade.effectDescription;
+    // Tooltip text
+    const tooltipText = document.createElement("span");
+    tooltipText.className = "tooltiptext";
+    tooltipText.textContent = upgrade.description;
+    tooltipWrapper.appendChild(tooltipText);
 
-  // Move these lines BEFORE you use maxed in the ownership display!
-  const locked = isUpgradeLocked(upgrade);
-  const maxed = upgrade.max !== null && owned >= upgrade.max;
+    // Effect
+    const desc = document.createElement("span");
+    desc.textContent = upgrade.effectDescription;
 
-  // Ownership display
-  const ownedDisplay = document.createElement("span");
-  ownedDisplay.style.fontWeight = "bold";
-  if (maxed) {
-    ownedDisplay.textContent = "MAX";
-  } else if (owned > 0) {
-    ownedDisplay.textContent = `Owned: ${owned}`;
-  } else {
-    ownedDisplay.textContent = ""; // Don't display anything if you don't own any
-  }
+    // Move these lines BEFORE you use maxed in the ownership display!
+    const locked = isUpgradeLocked(upgrade);
+    const maxed = upgrade.max !== null && owned >= upgrade.max;
 
-  // Cost
-  const cost = document.createElement("p");
-  cost.style.fontWeight = "bold";
-  cost.style.marginBottom = "0.5rem";
-  cost.textContent = `${formatNumber(currentCost) + " 🧊"}`;
-
-  if (locked) {
-    upgradeDiv.classList.add("locked-upgrade");
-    upgradeDiv.style.opacity = "0.5";
-    upgradeDiv.style.pointerEvents = "none";
-    cost.textContent = "Locked";
-  } else if (maxed) {
-    upgradeDiv.classList.add("maxed-upgrade");
-    upgradeDiv.style.opacity = "0.5";
-    upgradeDiv.style.pointerEvents = "none";
-    cost.textContent = "MAXED";
-  }
-
-  // Buy by clicking
-  upgradeDiv.addEventListener("click", function () {
-    if (isUpgradeLocked(upgrade)) return;
-    if (upgrade.max !== null && owned >= upgrade.max) return;
-    buyUpgrade(upgrade.name);
-    // After purchase, increase price and update display
-    owned = parseInt(localStorage.getItem(upgrade.name) || "0", 10);
-    if (upgrade.max !== null && owned >= upgrade.max) {
+    // Ownership display
+    const ownedDisplay = document.createElement("span");
+    ownedDisplay.style.fontWeight = "bold";
+    ownedDisplay.style.marginLeft = "0.5rem";
+    ownedDisplay.style.color = "#2196f3"; // Blue color that fits your scheme
+    if (maxed) {
       ownedDisplay.textContent = "MAX";
-      cost.textContent = "MAXED";
-      upgradeDiv.classList.add("maxed-upgrade");
-      upgradeDiv.style.opacity = "0.5";
-      upgradeDiv.style.pointerEvents = "none";
+    } else if (owned > 0) {
+      ownedDisplay.textContent = `${owned}`;
+    } else {
+      ownedDisplay.textContent = "";
+    }
+
+    // Cost
+    const cost = document.createElement("p");
+    cost.style.fontWeight = "bold";
+    cost.style.marginBottom = "0.5rem";
+    cost.textContent = `${formatNumber(currentCost) + " 🧊"}`;
+
+    if (locked) {
       return;
     }
-    ownedDisplay.textContent = `Owned: ${owned}${upgrade.max !== null ? "/" + upgrade.max : ""}`;
-    const newCost = increaseUpgradePrice(upgrade.name);
-    cost.textContent = `${formatNumber(newCost) + " 🧊"}`;
-  });
+    // Buy by clicking
+    upgradeDiv.addEventListener("click", function () {
+      if (isUpgradeLocked(upgrade)) return;
+      if (upgrade.max !== null && owned >= upgrade.max) return;
+      buyUpgrade(upgrade.name);
+      renderUpgrades(); 
+    });
 
-// Create cards
-upgradeDiv.appendChild(tooltipWrapper);
-upgradeDiv.appendChild(document.createElement("br"));
-upgradeDiv.appendChild(desc);
-if (ownedDisplay.textContent !== "") {
-  upgradeDiv.appendChild(document.createElement("br"));
-  upgradeDiv.appendChild(ownedDisplay);
+    // Create cards
+    upgradeDiv.appendChild(tooltipWrapper);
+    upgradeDiv.appendChild(document.createElement("br"));
+    upgradeDiv.appendChild(desc);
+    if (ownedDisplay.textContent !== "") {
+      upgradeDiv.appendChild(document.createElement("br"));
+      title.appendChild(ownedDisplay);
+    }
+    upgradeDiv.appendChild(cost);
+    container.appendChild(upgradeDiv);
+  });
 }
-upgradeDiv.appendChild(cost);
-container.appendChild(upgradeDiv);
-});
+
+// Call renderUpgrades initially
+renderUpgrades();
 
 // Show bought alert
 function boughtAlert(cost, item) {
