@@ -5,7 +5,7 @@
   <title>Ice Clicker</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/x-icon" href="IceClickerFavicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 </head>
 
 <body>
@@ -31,15 +31,17 @@
       <p>Achievements: 0/30 🏆</p>
       <br>
       <hr>
-      <h3>Upgrades Owned</h3>
-      <div class="upgrade">
-        <h4>🛠️ Ice Drill x2</h4>
-        <p>+5/click</p>
+      <h3>Ice Crystals</h3>
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; flex-direction: column; align-items: flex-start;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-weight: bold;">Crystals:</span>
+          <span id="iceCrystalsDisplay" style="font-weight: bold; color: #2196f3;">0</span>
+        </div>
+        <button id="resetForCrystalBtn" class="styled-button"
+          style="padding: 4px 10px; font-size: 1rem; background: #4ac0f2; color: #0d1b2a; border-radius: 6px; margin-left: 0; margin-top: 0.5rem;">Reset for
+          Crystal</button>
       </div>
-      <div class="upgrade">
-        <h4>🐧 Penguin Worker x3</h4>
-        <p>+5/sec</p>
-      </div>
+      <div id="crystal-upgrade-container" class="crystal-upgrade-container"></div>
     </aside>
 
     <!-- Center Clicker Area -->
@@ -51,7 +53,7 @@
       <img width="300px" onclick="clickIce()" style="cursor: pointer;" src="ice.png" /><br><br>
       <h2 class="title">Ice: <span id="ice"></span></h2>
       <p>cubic inches</p> <br> <br>
-     <footer>  🧊 Copyright 2025 Ice Clicker. 🧊</footer>
+      <footer> 🧊 Copyright 2025 Ice Clicker. 🧊</footer>
     </section>
 
     <!-- Right Sidebar -->
@@ -94,5 +96,6 @@
 </body>
 <script src="script.js"></script>
 <script src="upgrades.js"></script>
+<script src="crystals.js"></script>
 
 </html>

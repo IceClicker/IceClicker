@@ -13,23 +13,45 @@
   background-color: none;
 }
 
-.styled-button {
-  background-color: #f44336; 
-  color: white; 
-  border: none; 
-  padding: 10px 20px; 
-  border-radius: 5px; 
-  font-size: 16px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease; 
+.styled-button, .styled-button:visited {
+  background: linear-gradient(90deg, #4ac0f2 0%, #2196f3 100%);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #4ac0f233;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  letter-spacing: 0.5px;
+  outline: none;
+  margin-top: 0.5rem;
 }
 
-.styled-button:hover {
-  background-color: #d32f2f; 
+.styled-button:hover, .styled-button:focus {
+  background: linear-gradient(90deg, #2196f3 0%, #4ac0f2 100%);
+  box-shadow: 0 4px 16px #4ac0f277;
+  transform: translateY(-2px) scale(1.04);
 }
 
 .styled-button:active {
-  background-color: #b71c1c;
+  background: linear-gradient(90deg, #1976d2 0%, #4ac0f2 100%);
+  box-shadow: 0 1px 4px #2196f355;
+  transform: scale(0.98);
+}
+
+body.dark-mode .styled-button {
+  background: linear-gradient(90deg, #1976d2 0%, #4ac0f2 100%);
+  color: #e0f7ff;
+}
+
+body.dark-mode .styled-button:hover, body.dark-mode .styled-button:focus {
+  background: linear-gradient(90deg, #4ac0f2 0%, #1976d2 100%);
+}
+
+body.dark-mode .styled-button:active {
+  background: linear-gradient(90deg, #0d1b2a 0%, #4ac0f2 100%);
 }
 
 /* Pulse Ice */
@@ -456,16 +478,16 @@ body.dark-mode {
 
 /* Buttons */
 .dark-mode .styled-button {
-  background-color: #4ac0f2;
-  color: #0d1b2a;
+  background: linear-gradient(90deg, #1976d2 0%, #4ac0f2 100%);
+  color: #e0f7ff;
 }
 
-.dark-mode .styled-button:hover {
-  background-color: #79d4f8;
+.dark-mode .styled-button:hover, .dark-mode .styled-button:focus {
+  background: linear-gradient(90deg, #4ac0f2 0%, #1976d2 100%);
 }
 
 .dark-mode .styled-button:active {
-  background-color: #a8e4ff;
+  background: linear-gradient(90deg, #0d1b2a 0%, #4ac0f2 100%);
 }
 
 .dark-mode .close-btn {
@@ -565,4 +587,80 @@ body.dark-mode .settingsBtn:active {
   100% {
     opacity: 0;
   }
+}
+
+/* Crystal Upgrades Section */
+.crystal-upgrade-container {
+  padding-right: 0rem;
+  height: 1rem;
+  max-height: 24rem;   
+  width: 100%;         
+  min-width: 0;        
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  scrollbar-width: auto;
+  scrollbar-color: #4ac0f2 #eefbff;
+}
+
+.crystal-upgrade-container::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.crystal-upgrade-container::-webkit-scrollbar {
+  width: 8px;
+  background: #eefbff;
+  border-radius: 8px;
+}
+
+.crystal-upgrade-container::-webkit-scrollbar-thumb {
+  background: #4ac0f2;
+  border-radius: 8px;
+  border: 2px solid #eefbff;
+}
+
+.crystal-upgrade-container::-webkit-scrollbar-thumb:hover {
+  background: #2196F3;
+}
+
+.crystal-upgrade-container .upgrade {
+  margin: 1rem 0;
+  background: #eefbff;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #bde0f7;
+  cursor: pointer;
+  transition: background 0.2s;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.crystal-upgrade-container .upgrade:hover {
+  background: #d0f0ff;
+}
+
+body.dark-mode .crystal-upgrade-container {
+  background: #22303f;
+  scrollbar-color: #4ac0f2 #22303f;
+}
+body.dark-mode .crystal-upgrade-container::-webkit-scrollbar {
+  background: #22303f;
+}
+body.dark-mode .crystal-upgrade-container::-webkit-scrollbar-thumb {
+  background: #4ac0f2;
+  border: 2px solid #22303f;
+}
+body.dark-mode .crystal-upgrade-container::-webkit-scrollbar-thumb:hover {
+  background: #79d4f8;
+}
+body.dark-mode .crystal-upgrade-container .upgrade {
+  background: #22303f;
+  border: 1px solid #4ac0f2;
+  color: #e0f7ff;
+}
+body.dark-mode .crystal-upgrade-container .upgrade:hover {
+  background: #2e4053;
 }
