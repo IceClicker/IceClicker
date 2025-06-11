@@ -112,9 +112,9 @@ function convertIceToCrystal() {
     document.getElementById('ice').textContent = ice;
     updateIceCrystalsDisplay();
     renderCrystalUpgrades();
-    alert('You gained 1 Ice Crystal!');
+    showCustomAlert('You gained 1 Ice Crystal!');
   } else {
-    alert('You need at least 1 billion ice to convert!');
+    showCustomAlert('You need at least 1 billion ice to convert!');
   }
 }
 
@@ -138,6 +138,7 @@ function renderCrystalUpgrades() {
   const crystals = getIceCrystals();
   if (crystals <= 0) {
     container.style.display = "none";
+    container.innerHTML = "";
     return;
   } else {
     container.style.display = "";
@@ -174,7 +175,7 @@ function renderCrystalUpgrades() {
       if (maxed) return;
       let crystals = getIceCrystals();
       if (crystals < cost) {
-        alert("Not enough ice crystals!");
+        showCustomAlert("Not enough ice crystals!");
         return;
       }
       setIceCrystals(crystals - cost);
@@ -199,30 +200,100 @@ window.addEventListener('DOMContentLoaded', function() {
   if (resetBtn) {
     resetBtn.onclick = function() {
       if (ice < 1e9) {
-        alert('You need at least 1 billion ice to reset for a crystal!');
+        showCustomAlert('You need at least 1 billion ice to reset for a crystal!');
         return;
       }
-      if (confirm('Are you sure you want to reset your progress for 1 Ice Crystal? This will reset your ice and upgrades!')) {
-        // Award 1 ice crystal
-        let crystals = parseInt(localStorage.getItem('iceCrystals') || '0', 10);
-        localStorage.setItem('iceCrystals', crystals + 1);
-        // Reset main progress (but not settings or crystals)
-        localStorage.setItem('ice', 0);
-        localStorage.setItem('perClick', 1);
-        localStorage.setItem('autoClick', 0);
-        localStorage.setItem('globalWarmingPercent', 0.5);
-        // Reset all upgrades
-        upgrades.forEach(upg => {
-          localStorage.setItem(upg.name, 0);
-          localStorage.removeItem(upg.name + '_cost');
-        });
-        // Optionally reset other progress here
-        alert('Progress reset! You gained 1 Ice Crystal.');
-        window.location.reload();
-      }
+      showCustomConfirm('Are you sure you want to reset your progress for 1 Ice Crystal? This will reset your ice and upgrades!', function(confirmed) {
+        if (confirmed) {
+          // Award 1 ice crystal
+          let crystals = parseInt(localStorage.getItem('iceCrystals') || '0', 10);
+          localStorage.setItem('iceCrystals', crystals + 1);
+          // Reset main progress (but not settings or crystals)
+          localStorage.setItem('ice', 0);
+          localStorage.setItem('perClick', 1);
+          localStorage.setItem('autoClick', 0);
+          localStorage.setItem('globalWarmingPercent', 0.5);
+          // Reset all upgrades
+          upgrades.forEach(upg => {
+            localStorage.setItem(upg.name, 0);
+            localStorage.removeItem(upg.name + '_cost');
+          });
+          // Optionally reset other progress here
+          showCustomAlert('Progress reset! You gained 1 Ice Crystal.');
+          // Only reload after user closes the alert
+          const modal = document.getElementById('customAlertModal');
+          const okBtn = document.getElementById('customAlertOkBtn');
+          function reloadOnClose() {
+            modal.style.display = 'none';
+            okBtn.removeEventListener('click', reloadOnClose);
+            document.removeEventListener('keydown', escListener);
+            window.location.reload();
+          }
+          function escListener(e) { if (e.key === 'Escape') reloadOnClose(); }
+          okBtn.addEventListener('click', reloadOnClose);
+          document.addEventListener('keydown', escListener);
+        }
+      });
     };
   }
 });
 
-// Call this after reset or when opening the crystal shop
-renderCrystalUpgrades();
+// Custom confirm modal (optional, for reset confirmation)
+function showCustomConfirm(message, callback) {
+  const modal = document.getElementById('customAlertModal');
+  const msg = document.getElementById('customAlertMessage');
+  const okBtn = document.getElementById('customAlertOkBtn');
+  let cancelBtn = document.getElementById('customAlertCancelBtn');
+  if (!modal || !msg || !okBtn) return;
+  msg.textContent = message;
+  okBtn.textContent = 'OK';
+  // Add Cancel button if not present
+  if (!cancelBtn) {
+    cancelBtn = document.createElement('button');
+    cancelBtn.className = 'styled-button';
+    cancelBtn.id = 'customAlertCancelBtn';
+    cancelBtn.style.marginLeft = '1rem';
+    okBtn.parentNode.appendChild(cancelBtn);
+  }
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.style.display = '';
+  modal.style.display = 'flex';
+  okBtn.focus();
+  function cleanup(result) {
+    modal.style.display = 'none';
+    okBtn.removeEventListener('click', okHandler);
+    cancelBtn.removeEventListener('click', cancelHandler);
+    document.removeEventListener('keydown', escListener);
+    if (callback) callback(result);
+  }
+  function okHandler() { cleanup(true); }
+  function cancelHandler() { cleanup(false); }
+  function escListener(e) { if (e.key === 'Escape') cleanup(false); }
+  okBtn.addEventListener('click', okHandler);
+  cancelBtn.addEventListener('click', cancelHandler);
+  document.addEventListener('keydown', escListener);
+}
+
+// Custom alert modal logic
+function showCustomAlert(message) {
+  const modal = document.getElementById('customAlertModal');
+  const msg = document.getElementById('customAlertMessage');
+  const okBtn = document.getElementById('customAlertOkBtn');
+  let cancelBtn = document.getElementById('customAlertCancelBtn');
+  if (cancelBtn) cancelBtn.style.display = 'none'; // Hide cancel for simple alerts
+  if (!modal || !msg || !okBtn) return;
+  msg.textContent = message;
+  modal.style.display = 'flex';
+  okBtn.textContent = 'OK';
+  okBtn.focus();
+  function closeModal() {
+    modal.style.display = 'none';
+    okBtn.removeEventListener('click', closeModal);
+    document.removeEventListener('keydown', escListener);
+  }
+  function escListener(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+  okBtn.addEventListener('click', closeModal);
+  document.addEventListener('keydown', escListener);
+}

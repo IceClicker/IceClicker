@@ -664,3 +664,52 @@ body.dark-mode .crystal-upgrade-container .upgrade {
 body.dark-mode .crystal-upgrade-container .upgrade:hover {
   background: #2e4053;
 }
+
+/* Custom Alert Modal */
+.custom-alert-modal {
+  display: none;
+  position: fixed;
+  z-index: 20000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-alert-content {
+  background: #fff;
+  color: #1a4c73;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(76,195,247,0.18);
+  text-align: center;
+  min-width: 220px;
+  max-width: 90vw;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+body.dark-mode .custom-alert-content {
+  background: #22303f;
+  color: #e0f7ff;
+}
+
+.custom-alert-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  transition: color 0.3s ease;
+}
+
+.custom-alert-close:hover {
+  color: #4ac0f2;
+}

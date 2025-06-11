@@ -577,14 +577,14 @@ function buyUpgrade(upgradeName) {
   let owned = parseInt(localStorage.getItem(upgrade.name) || "0", 10);
 
   if (upgrade.max !== null && owned >= upgrade.max) {
-    alert("Maxed out!");
+    showCustomAlert("Maxed out!");
     return;
   }
 
   // Get cost
   let currentCost = parseFloat(localStorage.getItem(upgrade.name + "_cost")) || upgrade.baseCost;
   if (currentCost !== null && ice < currentCost) {
-    alert("Not enough ice!");
+    showCustomAlert("Not enough ice!");
     return;
   }
 
@@ -784,5 +784,17 @@ function boughtAlert(cost, item) {
 
   alertText.addEventListener("animationend", () => {
     alertText.remove();
+  });
+}
+
+// Reset progress
+function resetProgress() {
+  showCustomConfirm("Are you sure you want to reset your progress? This action cannot be undone.", function(confirmed) {
+    if (confirmed) {
+      // Clear only game-related progress, not settings
+      localStorage.clear();
+      setVariables();
+      window.location.reload();
+    }
   });
 }
